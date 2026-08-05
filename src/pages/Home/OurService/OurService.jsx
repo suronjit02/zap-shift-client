@@ -64,7 +64,7 @@ const OurService = () => {
           {steps.map((step) => (
             <div
               key={step.id}
-              className={` ${step.id === 2 ? "bg-primary" : "bg-white"}  rounded-2xl shadow-sm p-8 space-y-2 flex flex-col items-center text-center`}
+              className={` ${step.id === 2 ? "bg-accent" : "bg-white"}  rounded-2xl shadow-sm p-8 space-y-2 flex flex-col items-center text-center`}
             >
               <img
                 className="h-15 bg-linear-to-t from-transparent to-gray-200 rounded-full p-2"
