@@ -5,6 +5,7 @@ import OurService from "./OurService/OurService";
 import Brand from "./Brand/Brand";
 import MerchantAndCustomer from "./MerchantAndCustomer/MerchantAndCustomer";
 import Reviews from "./Reviews/Reviews";
+import Faq from "./FAQ/Faq";
 
 const reviewsPromise = fetch("/reviews.json").then((res) => res.json());
 
@@ -17,6 +18,7 @@ const Home = () => {
       <Brand />
       <MerchantAndCustomer />
       <Reviews reviewsPromise={reviewsPromise}></Reviews>
+      <Faq></Faq>
     </div>
   );
 };
