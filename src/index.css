@@ -24,6 +24,8 @@ body {
 .bg-black-13 {
   background-color: #0b0b0b;
 }
-.text-green-6 {
-  color: #caeb66;
+
+/* brand component */
+.swiper-wrapper {
+  transition-timing-function: linear !important;
 }
