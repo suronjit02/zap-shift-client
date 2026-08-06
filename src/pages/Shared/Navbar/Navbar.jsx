@@ -71,7 +71,7 @@ const Navbar = () => {
       <div className="navbar-end gap-2">
         <Link className="btn rounded-lg px-5">Sign In</Link>
         <Link className="btn btn-accent rounded-lg px-5">Be a rider</Link>
-        <Link className="p-2 rounded-full bg-black-13 text-green-6 text-2xl">
+        <Link className="p-2 rounded-full bg-black-13 text-primary text-2xl">
           <GoArrowUpRight />
         </Link>
       </div>

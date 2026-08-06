@@ -29,3 +29,39 @@ body {
 .swiper-wrapper {
   transition-timing-function: linear !important;
 }
+
+/* review or testimonial swiper */
+.mySwiper {
+  padding: 40px 0 70px;
+}
+
+.mySwiper .swiper-slide {
+  opacity: 0.35;
+  transition: all 0.4s ease;
+}
+
+/* Review Card Animation */
+.mySwiper .swiper-slide .review-card {
+  transform: translateY(40px) scale(0.85);
+  transition: all 0.4s ease;
+}
+
+/* Active Card */
+.mySwiper .swiper-slide-active {
+  opacity: 1;
+}
+
+.mySwiper .swiper-slide-active .review-card {
+  transform: translateY(0) scale(1);
+}
+
+/* Left & Right Card */
+.mySwiper .swiper-slide-prev,
+.mySwiper .swiper-slide-next {
+  opacity: 0.7;
+}
+
+.mySwiper .swiper-slide-prev .review-card,
+.mySwiper .swiper-slide-next .review-card {
+  transform: translateY(50px) scale(1);
+}
