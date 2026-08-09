@@ -78,7 +78,7 @@ const Coverage = () => {
       <MapContainer
         center={position}
         zoom={7}
-        scrollWheelZoom={true}
+        scrollWheelZoom={false}
         ref={mapRef}
         className="h-96"
       >
