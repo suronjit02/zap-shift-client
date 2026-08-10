@@ -4,6 +4,9 @@ import Home from "../pages/Home/Home";
 import Coverage from "../pages/Coverage/Coverage";
 import Error404 from "../pages/Error404.jsx/Error404";
 import AboutUs from "../pages/AboutPage/AboutUs";
+import AuthLayout from "../layouts/AuthLayout";
+import Login from "../pages/Auth/Login";
+import Register from "../pages/Auth/Register";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +29,20 @@ export const router = createBrowserRouter([
       {
         path: "/*",
         element: <Error404 />,
+      },
+    ],
+  },
+  {
+    path: "/",
+    Component: AuthLayout,
+    children: [
+      {
+        path: "login",
+        Component: Login,
+      },
+      {
+        path: "register",
+        Component: Register,
       },
     ],
   },
