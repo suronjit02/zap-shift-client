@@ -7,6 +7,9 @@ import AboutUs from "../pages/AboutPage/AboutUs";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
+import ForgotPass from "../pages/Auth/ForgetPass/ForgotPass";
+import EnterCode from "../pages/Auth/ForgetPass/EnterCode";
+import ResetPass from "../pages/Auth/ForgetPass/ResetPass";
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +46,18 @@ export const router = createBrowserRouter([
       {
         path: "register",
         Component: Register,
+      },
+      {
+        path: "forgot-password",
+        Component: ForgotPass,
+      },
+      {
+        path: "enter-code",
+        Component: EnterCode,
+      },
+      {
+        path: "reset-password",
+        Component: ResetPass,
       },
     ],
   },
