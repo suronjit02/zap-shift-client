@@ -5,14 +5,26 @@ import { Outlet } from "react-router";
 
 const AuthLayout = () => {
   return (
-    <div className="max-w-7xl mx-auto min-h-screen pt-10">
-      <Logo></Logo>
-      <div className="flex justify-center items-center">
-        <div className="flex-1">
-          <Outlet></Outlet>
+    <div className="min-h-screen">
+      <div className="flex min-h-screen">
+        {/* left part - form */}
+        <div className="flex-1 flex flex-col items-center justify-center px-6 py-10 md:px-12">
+          <div className="w-full max-w-md">
+            <nav className="mb-8 flex justify-center md:justify-start">
+              <Logo />
+            </nav>
+
+            <Outlet />
+          </div>
         </div>
-        <div className="flex-1 ">
-          <img src={authImage} alt="AuthImage" />
+
+        {/* right part - image */}
+        <div className="hidden md:flex flex-1 bg-[#FAFDF0] min-h-screen items-center justify-center p-10">
+          <img
+            className="max-w-full max-h-[85vh] object-contain"
+            src={authImage}
+            alt="AuthImage"
+          />
         </div>
       </div>
     </div>
