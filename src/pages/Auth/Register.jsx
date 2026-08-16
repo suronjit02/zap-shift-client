@@ -3,7 +3,11 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 
 const Register = () => {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const handleRegistration = (data) => {
     console.log(data);
@@ -25,31 +29,51 @@ const Register = () => {
           </legend>
 
           {/* name */}
-          <label className="label">Name</label>
+          <label className="label">
+            Name <span className="text-red-600">*</span>
+          </label>
           <input
             type="text"
-            {...register("name")}
+            {...register("name", { required: true })}
             className="input"
             placeholder="Name"
           />
+          {errors.name?.type === "required" && (
+            <p className="text-red-600">Name is required</p>
+          )}
 
           {/* email */}
-          <label className="label">Email</label>
+          <label className="label">
+            Email <span className="text-red-600">*</span>
+          </label>
           <input
             type="email"
-            {...register("email")}
+            {...register("email", { required: true })}
             className="input"
             placeholder="Email"
           />
+          {errors.email?.type === "required" && (
+            <p className="text-red-600">Email is required</p>
+          )}
 
           {/* password */}
-          <label className="label">Password</label>
+          <label className="label">
+            Password <span className="text-red-600">*</span>
+          </label>
           <input
             type="password"
-            {...register("password")}
+            {...register("password", { required: true, minLength: 6 })}
             className="input"
             placeholder="Password"
           />
+          {errors.password?.type === "required" && (
+            <p className="text-red-600">Password is required</p>
+          )}
+          {errors.password?.type === "minLength" && (
+            <p className="text-red-600">
+              Password must be 6 character or longer.
+            </p>
+          )}
 
           <button className="btn btn-neutral bg-accent text-secondary border-none shadow-none mt-4">
             Register
