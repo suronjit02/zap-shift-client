@@ -2,8 +2,20 @@ import React from "react";
 import Logo from "../../../components/Logo/Logo";
 import { Link, NavLink } from "react-router";
 import { GoArrowUpRight } from "react-icons/go";
+import useAuth from "../../../hooks/useAuth";
 
 const Navbar = () => {
+  const { user, logOut } = useAuth();
+
+  // logout function
+  const handleLogOut = () => {
+    logOut()
+      .then()
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const navlinks = (
     <>
       <li>
@@ -69,8 +81,18 @@ const Navbar = () => {
 
       {/* navbar end */}
       <div className="navbar-end gap-2">
-        <Link className="btn rounded-lg px-5">Sign In</Link>
-        <Link className="btn btn-accent rounded-lg px-5">Be a rider</Link>
+        {user ? (
+          <Link onClick={handleLogOut} className="btn rounded-lg px-5">
+            Sign Out
+          </Link>
+        ) : (
+          <Link to={"/login"} className="btn rounded-lg px-5">
+            Sign In
+          </Link>
+        )}
+        <Link to={"/be-a-rider"} className="btn btn-accent rounded-lg px-5">
+          Be a rider
+        </Link>
         <Link className="p-2 rounded-full bg-black-13 text-primary text-2xl">
           <GoArrowUpRight />
         </Link>
