@@ -110,7 +110,9 @@ const Register = () => {
       </form>
       <p className="text-center text-lg text-secondary-content">or</p>
       {/* social login: Google */}
-      <SocialLogin></SocialLogin>
+      <div className="w-xs">
+        <SocialLogin></SocialLogin>
+      </div>
     </div>
   );
 };
