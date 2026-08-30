@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import SocialLogin from "./SocialLogin/SocialLogin";
+import axios from "axios";
 
 const Register = () => {
   const {
@@ -16,9 +17,23 @@ const Register = () => {
   const handleRegistration = (data) => {
     console.log(data);
 
+    const profileImg = data.photo[0];
+
     registerUser(data.email, data.password)
       .then((result) => {
         console.log(result.user);
+
+        // store the image and get the photo url
+        const formData = new FormData();
+        formData.append("image", profileImg);
+
+        const image_Api_Url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb_host_key}`;
+
+        axios.post(image_Api_Url, formData).then((res) => {
+          console.log("after image upload", res.data.data.url);
+
+          // update user profile
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -39,6 +54,19 @@ const Register = () => {
           <legend className="fieldset-legend text-xl">
             Register with ZapShift
           </legend>
+
+          {/* image field */}
+          <label className="label">
+            Photo <span className="text-red-600">*</span>
+          </label>
+          <input
+            type="file"
+            {...register("photo", { required: true })}
+            className="file-input"
+          />
+          {errors.photo?.type === "required" && (
+            <p className="text-red-600">Photo is required</p>
+          )}
 
           {/* name */}
           <label className="label">
