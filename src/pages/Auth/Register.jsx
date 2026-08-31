@@ -12,7 +12,7 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const { registerUser } = useAuth();
+  const { registerUser, updateUserProfile } = useAuth();
 
   const handleRegistration = (data) => {
     console.log(data);
@@ -32,7 +32,15 @@ const Register = () => {
         axios.post(image_Api_Url, formData).then((res) => {
           console.log("after image upload", res.data.data.url);
 
-          // update user profile
+          // update user profile to firebase
+          const userProfile = {
+            displayName: data.name,
+            photoURL: res.data.data.url,
+          };
+
+          updateUserProfile(userProfile)
+            .then(console.log("user profile updated done"))
+            .catch((err) => console.log(err));
         });
       })
       .catch((error) => {
