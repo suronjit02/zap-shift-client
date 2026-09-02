@@ -71,9 +71,9 @@ const Navbar = () => {
         </div>
 
         {/* Logo */}
-        <Link to="/" className=" text-xl">
+        <div className=" text-xl">
           <Logo />
-        </Link>
+        </div>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navlinks}</ul>
@@ -90,7 +90,7 @@ const Navbar = () => {
             Sign In
           </Link>
         )}
-        <Link to={"/be-a-rider"} className="btn btn-accent rounded-lg px-5">
+        <Link to={"/become-a-rider"} className="btn btn-accent rounded-lg px-5">
           Be a rider
         </Link>
         <Link className="p-2 rounded-full bg-black-13 text-primary text-2xl">

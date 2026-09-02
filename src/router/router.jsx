@@ -10,6 +10,8 @@ import Register from "../pages/Auth/Register";
 import ForgotPass from "../pages/Auth/ForgetPass/ForgotPass";
 import EnterCode from "../pages/Auth/ForgetPass/EnterCode";
 import ResetPass from "../pages/Auth/ForgetPass/ResetPass";
+import Rider from "../pages/Rider/Rider";
+import PrivateRouter from "./PrivateRouter";
 
 export const router = createBrowserRouter([
   {
@@ -30,11 +32,20 @@ export const router = createBrowserRouter([
         element: <AboutUs />,
       },
       {
+        path: "/become-a-rider",
+        element: (
+          <PrivateRouter>
+            <Rider />
+          </PrivateRouter>
+        ),
+      },
+      {
         path: "/*",
         element: <Error404 />,
       },
     ],
   },
+  // auth routes
   {
     path: "/",
     Component: AuthLayout,
