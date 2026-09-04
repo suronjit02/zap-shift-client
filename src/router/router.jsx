@@ -12,6 +12,7 @@ import EnterCode from "../pages/Auth/ForgetPass/EnterCode";
 import ResetPass from "../pages/Auth/ForgetPass/ResetPass";
 import Rider from "../pages/Rider/Rider";
 import PrivateRouter from "./PrivateRouter";
+import SendParcel from "../pages/sendParcel/SendParcel";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
       {
         path: "/about-us",
         element: <AboutUs />,
+      },
+      {
+        path: "/send-parcel",
+        element: <SendParcel />,
       },
       {
         path: "/become-a-rider",
