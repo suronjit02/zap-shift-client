@@ -34,7 +34,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/send-parcel",
-        element: <SendParcel />,
+        element: (
+          <PrivateRouter>
+            <SendParcel />
+          </PrivateRouter>
+        ),
       },
       {
         path: "/become-a-rider",
