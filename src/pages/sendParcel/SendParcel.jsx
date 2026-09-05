@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 
 const SendParcel = () => {
-  const [parcelType, setParcelType] = useState("Document");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const districts = [
     "Dhaka",
@@ -14,9 +18,9 @@ const SendParcel = () => {
     "Mymensingh",
   ];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
+  const handleSendParcel = (data) => {
+    console.log(data);
+    console.log("hi");
   };
 
   return (
@@ -28,16 +32,15 @@ const SendParcel = () => {
         </h1>
         <p className="text-gray-600 mb-8">Enter your parcel details</p>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit(handleSendParcel)} className="space-y-6">
           {/* Document / Not-Document Radio Selection */}
           <div className="flex items-center space-x-8 mb-6">
             <label className="cursor-pointer flex items-center space-x-2">
               <input
                 type="radio"
-                name="parcelType"
                 className="radio radio-success"
-                checked={parcelType === "Document"}
-                onChange={() => setParcelType("Document")}
+                value={"document"}
+                {...register("parcelType")}
               />
               <span className="text-sm font-medium text-gray-700">
                 Document
@@ -46,10 +49,9 @@ const SendParcel = () => {
             <label className="cursor-pointer flex items-center space-x-2">
               <input
                 type="radio"
-                name="parcelType"
                 className="radio radio-success"
-                checked={parcelType === "Not-Document"}
-                onChange={() => setParcelType("Not-Document")}
+                value={"non - document"}
+                {...register("parcelType")}
               />
               <span className="text-sm font-medium text-gray-700">
                 Not-Document
