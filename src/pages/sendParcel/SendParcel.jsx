@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useLoaderData } from "react-router";
 
 const SendParcel = () => {
   const {
@@ -7,20 +8,14 @@ const SendParcel = () => {
     formState: { errors },
   } = useForm();
 
-  const districts = [
-    "Dhaka",
-    "Chittagong",
-    "Sylhet",
-    "Rajshahi",
-    "Khulna",
-    "Barishal",
-    "Rangpur",
-    "Mymensingh",
-  ];
+  const serviceCenters = useLoaderData();
+
+  const regionsDuplicate = serviceCenters.map((center) => center.region);
+  const regions = [...new Set(regionsDuplicate)]; // Remove duplicates
+  console.log(regions);
 
   const handleSendParcel = (data) => {
     console.log(data);
-    console.log("hi");
   };
 
   return (
@@ -68,8 +63,14 @@ const SendParcel = () => {
               <input
                 type="text"
                 placeholder="Parcel Name"
+                {...register("parcelName", { required: true })}
                 className="input input-bordered w-full bg-white text-sm focus:outline-none focus:border-[#004d40]"
               />
+              {errors.parcelName?.type === "required" && (
+                <p className="text-red-500 text-xs mt-1">
+                  Parcel name is required
+                </p>
+              )}
             </div>
             <div>
               <label className="block text-xs font-semibold text-gray-600 mb-1">
@@ -78,8 +79,14 @@ const SendParcel = () => {
               <input
                 type="text"
                 placeholder="Parcel Weight (KG)"
+                {...register("parcelWeight", { required: true })}
                 className="input input-bordered w-full bg-white text-sm focus:outline-none focus:border-[#004d40]"
               />
+              {errors.parcelWeight?.type === "required" && (
+                <p className="text-red-500 text-xs mt-1">
+                  Parcel weight is required
+                </p>
+              )}
             </div>
           </div>
 
@@ -101,6 +108,7 @@ const SendParcel = () => {
                 </label>
                 <input
                   type="text"
+                  {...register("senderName")}
                   placeholder="Sender Name"
                   className="input input-bordered w-full bg-white text-sm focus:outline-none focus:border-[#004d40]"
                 />
@@ -111,6 +119,7 @@ const SendParcel = () => {
                 </label>
                 <input
                   type="text"
+                  {...register("senderAddress")}
                   placeholder="Address"
                   className="input input-bordered w-full bg-white text-sm focus:outline-none focus:border-[#004d40]"
                 />
@@ -121,21 +130,22 @@ const SendParcel = () => {
                 </label>
                 <input
                   type="text"
+                  {...register("senderPhone")}
                   placeholder="Sender Phone No"
                   className="input input-bordered w-full bg-white text-sm focus:outline-none focus:border-[#004d40]"
                 />
               </div>
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
-                  Your District
+                  Your Region
                 </label>
                 <select className="select select-bordered w-full bg-white text-sm text-gray-500 focus:outline-none focus:border-[#004d40]">
                   <option disabled selected>
-                    Select your District
+                    Select your Region
                   </option>
-                  {districts.map((d, idx) => (
-                    <option key={idx} value={d}>
-                      {d}
+                  {regions.map((r, idx) => (
+                    <option key={idx} value={r}>
+                      {r}
                     </option>
                   ))}
                 </select>
@@ -146,6 +156,7 @@ const SendParcel = () => {
                 </label>
                 <textarea
                   placeholder="Pickup Instruction"
+                  {...register("pickupInstruction")}
                   className="textarea textarea-bordered w-full bg-white text-sm h-24 focus:outline-none focus:border-[#004d40]"
                 ></textarea>
               </div>
@@ -163,6 +174,7 @@ const SendParcel = () => {
                 <input
                   type="text"
                   placeholder="Receiver Name"
+                  {...register("receiverName")}
                   className="input input-bordered w-full bg-white text-sm focus:outline-none focus:border-[#004d40]"
                 />
               </div>
@@ -173,6 +185,7 @@ const SendParcel = () => {
                 <input
                   type="text"
                   placeholder="Address"
+                  {...register("receiverAddress")}
                   className="input input-bordered w-full bg-white text-sm focus:outline-none focus:border-[#004d40]"
                 />
               </div>
@@ -183,20 +196,21 @@ const SendParcel = () => {
                 <input
                   type="text"
                   placeholder="Sender Contact No"
+                  {...register("receiverContact")}
                   className="input input-bordered w-full bg-white text-sm focus:outline-none focus:border-[#004d40]"
                 />
               </div>
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
-                  Receiver District
+                  Receiver Region
                 </label>
                 <select className="select select-bordered w-full bg-white text-sm text-gray-500 focus:outline-none focus:border-[#004d40]">
                   <option disabled selected>
-                    Select your District
+                    Select your Region
                   </option>
-                  {districts.map((d, idx) => (
-                    <option key={idx} value={d}>
-                      {d}
+                  {regions.map((r, idx) => (
+                    <option key={idx} value={r}>
+                      {r}
                     </option>
                   ))}
                 </select>
@@ -207,6 +221,7 @@ const SendParcel = () => {
                 </label>
                 <textarea
                   placeholder="Delivery Instruction"
+                  {...register("deliveryInstruction")}
                   className="textarea textarea-bordered w-full bg-white text-sm h-24 focus:outline-none focus:border-[#004d40]"
                 ></textarea>
               </div>
