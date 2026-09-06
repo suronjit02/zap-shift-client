@@ -5,6 +5,7 @@ const SendParcel = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
 
@@ -12,7 +13,19 @@ const SendParcel = () => {
 
   const regionsDuplicate = serviceCenters.map((center) => center.region);
   const regions = [...new Set(regionsDuplicate)]; // Remove duplicates
-  console.log(regions);
+  // console.log(regions);
+  const senderRegion = watch("senderRegion");
+  const receiverRegion = watch("receiverRegion");
+
+  const districtByRegion = (region) => {
+    const regionDistricts = serviceCenters.filter(
+      (center) => center.region === region,
+    );
+
+    const districts = regionDistricts.map((d) => d.district);
+
+    return districts;
+  };
 
   const handleSendParcel = (data) => {
     console.log(data);
@@ -135,15 +148,39 @@ const SendParcel = () => {
                   className="input input-bordered w-full bg-white text-sm focus:outline-none focus:border-[#004d40]"
                 />
               </div>
+              {/* sender region */}
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
                   Your Region
                 </label>
-                <select className="select select-bordered w-full bg-white text-sm text-gray-500 focus:outline-none focus:border-[#004d40]">
+                <select
+                  {...register("senderRegion")}
+                  className="select select-bordered w-full bg-white text-sm text-gray-500 focus:outline-none focus:border-[#004d40]"
+                >
                   <option disabled selected>
                     Select your Region
                   </option>
                   {regions.map((r, idx) => (
+                    <option key={idx} value={r}>
+                      {r}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* sender district */}
+              <div>
+                <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  Your District
+                </label>
+                <select
+                  {...register("senderDistrict")}
+                  className="select select-bordered w-full bg-white text-sm text-gray-500 focus:outline-none focus:border-[#004d40]"
+                >
+                  <option disabled selected>
+                    Select your District
+                  </option>
+                  {districtByRegion(senderRegion).map((r, idx) => (
                     <option key={idx} value={r}>
                       {r}
                     </option>
@@ -195,18 +232,23 @@ const SendParcel = () => {
                 </label>
                 <input
                   type="text"
-                  placeholder="Sender Contact No"
+                  placeholder="Receiver Contact No"
                   {...register("receiverContact")}
                   className="input input-bordered w-full bg-white text-sm focus:outline-none focus:border-[#004d40]"
                 />
               </div>
+
+              {/* receiver Region */}
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
                   Receiver Region
                 </label>
-                <select className="select select-bordered w-full bg-white text-sm text-gray-500 focus:outline-none focus:border-[#004d40]">
+                <select
+                  {...register("receiverRegion")}
+                  className="select select-bordered w-full bg-white text-sm text-gray-500 focus:outline-none focus:border-[#004d40]"
+                >
                   <option disabled selected>
-                    Select your Region
+                    Select Receiver Region
                   </option>
                   {regions.map((r, idx) => (
                     <option key={idx} value={r}>
@@ -215,6 +257,27 @@ const SendParcel = () => {
                   ))}
                 </select>
               </div>
+
+              {/* receiver district */}
+              <div>
+                <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  Receiver District
+                </label>
+                <select
+                  {...register("receiverDistrict")}
+                  className="select select-bordered w-full bg-white text-sm text-gray-500 focus:outline-none focus:border-[#004d40]"
+                >
+                  <option disabled selected>
+                    Select receiver District
+                  </option>
+                  {districtByRegion(receiverRegion).map((r, idx) => (
+                    <option key={idx} value={r}>
+                      {r}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
                   Delivery Instruction
