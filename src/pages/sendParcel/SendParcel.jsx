@@ -1,11 +1,11 @@
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { useLoaderData } from "react-router";
 
 const SendParcel = () => {
   const {
     register,
     handleSubmit,
-    watch,
+    control,
     formState: { errors },
   } = useForm();
 
@@ -14,8 +14,8 @@ const SendParcel = () => {
   const regionsDuplicate = serviceCenters.map((center) => center.region);
   const regions = [...new Set(regionsDuplicate)]; // Remove duplicates
   // console.log(regions);
-  const senderRegion = watch("senderRegion");
-  const receiverRegion = watch("receiverRegion");
+  const senderRegion = useWatch({ control, name: "senderRegion" });
+  const receiverRegion = useWatch({ control, name: "receiverRegion" });
 
   const districtByRegion = (region) => {
     const regionDistricts = serviceCenters.filter(
