@@ -29,6 +29,25 @@ const SendParcel = () => {
 
   const handleSendParcel = (data) => {
     console.log(data);
+
+    const isDocument = data.parcelType === "document";
+    const isSameDistrict = data.senderDistrict === data.receiverDistrict;
+    const parcelWeight = parseFloat(data.parcelWeight);
+
+    let cost = 0;
+
+    if (isDocument) {
+      cost = isSameDistrict ? 60 : 80;
+    } else {
+      if (parcelWeight <= 3) {
+        cost = isSameDistrict ? 110 : 150;
+      } else {
+        cost = isSameDistrict
+          ? 110 + (parcelWeight - 3) * 40
+          : 150 + ((parcelWeight - 3) * 40 + 40);
+      }
+    }
+    console.log("Final Cost : ", cost);
   };
 
   return (
@@ -58,7 +77,7 @@ const SendParcel = () => {
               <input
                 type="radio"
                 className="radio radio-success"
-                value={"non - document"}
+                value={"non-document"}
                 {...register("parcelType")}
               />
               <span className="text-sm font-medium text-gray-700">
@@ -90,7 +109,7 @@ const SendParcel = () => {
                 Parcel Weight (KG)
               </label>
               <input
-                type="text"
+                type="number"
                 placeholder="Parcel Weight (KG)"
                 {...register("parcelWeight", { required: true })}
                 className="input input-bordered w-full bg-white text-sm focus:outline-none focus:border-[#004d40]"
