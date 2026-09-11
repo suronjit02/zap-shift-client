@@ -16,6 +16,8 @@ const SendParcel = () => {
   // console.log(regions);
   const senderRegion = useWatch({ control, name: "senderRegion" });
   const receiverRegion = useWatch({ control, name: "receiverRegion" });
+  const parcelType = useWatch({ control, name: "parcelType" });
+  const isDocument = parcelType === "document";
 
   const districtByRegion = (region) => {
     const regionDistricts = serviceCenters.filter(
@@ -30,7 +32,7 @@ const SendParcel = () => {
   const handleSendParcel = (data) => {
     console.log(data);
 
-    const isDocument = data.parcelType === "document";
+    // const isDocument = data.parcelType === "document";
     const isSameDistrict = data.senderDistrict === data.receiverDistrict;
     const parcelWeight = parseFloat(data.parcelWeight);
 
@@ -110,9 +112,10 @@ const SendParcel = () => {
               </label>
               <input
                 type="number"
+                disabled={isDocument}
                 placeholder="Parcel Weight (KG)"
                 {...register("parcelWeight", { required: true })}
-                className="input input-bordered w-full bg-white text-sm focus:outline-none focus:border-[#004d40]"
+                className="input ${isDocument ? disabled : } input-bordered w-full bg-white text-sm focus:outline-none focus:border-[#004d40]"
               />
               {errors.parcelWeight?.type === "required" && (
                 <p className="text-red-500 text-xs mt-1">
