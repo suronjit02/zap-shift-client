@@ -6,7 +6,9 @@ import Navbar from "../pages/Shared/Navbar/Navbar";
 const RootLayout = () => {
   return (
     <div className="max-w-7xl mx-2 lg:mx-5 xl:mx-auto py-5 ">
-      <Navbar />
+      <div className="sticky top-0 z-50">
+        <Navbar />
+      </div>
 
       <div className="min-h-[calc(100vh-381px)] my-5">
         <Outlet />
