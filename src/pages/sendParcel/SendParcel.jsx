@@ -92,7 +92,7 @@ const SendParcel = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-xs font-semibold text-gray-600 mb-1">
-                Parcel Name
+                Parcel Name <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
@@ -108,7 +108,7 @@ const SendParcel = () => {
             </div>
             <div>
               <label className="block text-xs font-semibold text-gray-600 mb-1">
-                Parcel Weight (KG)
+                Parcel Weight (KG) <span className="text-red-500">*</span>
               </label>
               <input
                 type="number"
@@ -173,7 +173,7 @@ const SendParcel = () => {
               {/* sender region */}
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
-                  Your Region
+                  Your Region <span className="text-red-500">*</span>
                 </label>
                 <select
                   {...register("senderRegion")}
@@ -193,7 +193,7 @@ const SendParcel = () => {
               {/* sender district */}
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
-                  Your District
+                  Your District <span className="text-red-500">*</span>
                 </label>
                 <select
                   {...register("senderDistrict")}
@@ -263,7 +263,7 @@ const SendParcel = () => {
               {/* receiver Region */}
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
-                  Receiver Region
+                  Receiver Region <span className="text-red-500">*</span>
                 </label>
                 <select
                   {...register("receiverRegion")}
@@ -283,7 +283,7 @@ const SendParcel = () => {
               {/* receiver district */}
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
-                  Receiver District
+                  Receiver District <span className="text-red-500">*</span>
                 </label>
                 <select
                   {...register("receiverDistrict")}
