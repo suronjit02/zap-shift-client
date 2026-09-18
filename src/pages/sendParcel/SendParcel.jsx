@@ -180,12 +180,12 @@ const SendParcel = () => {
               </div>
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
-                  Sender Phone No
+                  Sender Contact No <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
                   {...register("senderPhone")}
-                  placeholder="Sender Phone No"
+                  placeholder="Sender Contact No"
                   className="input input-bordered w-full bg-white text-sm focus:outline-none focus:border-[#004d40]"
                 />
               </div>
@@ -269,7 +269,7 @@ const SendParcel = () => {
               </div>
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
-                  Receiver Contact No
+                  Receiver Contact No <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
