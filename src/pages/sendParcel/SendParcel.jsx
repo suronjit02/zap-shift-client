@@ -2,8 +2,12 @@ import { useForm, useWatch } from "react-hook-form";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAuth from "../../hooks/useAuth";
 
 const SendParcel = () => {
+  const { user } = useAuth();
+  console.log(user);
+
   const {
     register,
     handleSubmit,
@@ -75,11 +79,11 @@ const SendParcel = () => {
             console.error(err);
           });
 
-      // Swal.fire({
-      //   title: "Success!",
-      //   text: "Your parcel has been sent.",
-      //   icon: "success",
-      // });
+      Swal.fire({
+        title: "Success!",
+        text: "Your parcel has been sent.",
+        icon: "success",
+      });
     });
   };
 
@@ -94,13 +98,13 @@ const SendParcel = () => {
 
         <form onSubmit={handleSubmit(handleSendParcel)} className="space-y-6">
           {/* Document / Not-Document Radio Selection */}
-          <div className="flex items-center space-x-8 mb-6">
+          <div className="flex items-center space-x-8 mb-2">
             <label className="cursor-pointer flex items-center space-x-2">
               <input
                 type="radio"
                 className="radio radio-success"
                 value={"document"}
-                {...register("parcelType")}
+                {...register("parcelType", { required: true })}
               />
               <span className="text-sm font-medium text-gray-700">
                 Document
@@ -111,13 +115,18 @@ const SendParcel = () => {
                 type="radio"
                 className="radio radio-success"
                 value={"non-document"}
-                {...register("parcelType")}
+                {...register("parcelType", { required: true })}
               />
               <span className="text-sm font-medium text-gray-700">
                 Not-Document
               </span>
             </label>
           </div>
+          {errors.parcelType?.type === "required" && (
+            <p className="text-red-500 text-xs">
+              Parcel type is required. Please select an option.
+            </p>
+          )}
 
           {/* Parcel Name and Weight */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -174,10 +183,16 @@ const SendParcel = () => {
                 </label>
                 <input
                   type="text"
-                  {...register("senderName")}
+                  defaultValue={user?.displayName}
+                  {...register("senderName", { required: true })}
                   placeholder="Sender Name"
                   className="input input-bordered w-full bg-white text-sm focus:outline-none focus:border-[#004d40]"
                 />
+                {errors.senderName?.type === "required" && (
+                  <p className="text-red-500 text-xs mt-1">
+                    Sender name is required
+                  </p>
+                )}
               </div>
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
@@ -185,29 +200,60 @@ const SendParcel = () => {
                 </label>
                 <input
                   type="text"
-                  {...register("senderAddress")}
+                  {...register("senderAddress", { required: true })}
                   placeholder="Address"
                   className="input input-bordered w-full bg-white text-sm focus:outline-none focus:border-[#004d40]"
                 />
+                {errors.senderAddress?.type === "required" && (
+                  <p className="text-red-500 text-xs mt-1">
+                    Sender address is required
+                  </p>
+                )}
               </div>
+              {/* Sender Contact No */}
+
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
                   Sender Contact No <span className="text-red-500">*</span>
                 </label>
                 <input
-                  type="text"
-                  {...register("senderPhone")}
+                  type="number"
+                  {...register("senderPhone", { required: true })}
                   placeholder="Sender Contact No"
                   className="input input-bordered w-full bg-white text-sm focus:outline-none focus:border-[#004d40]"
                 />
+                {errors.senderPhone?.type === "required" && (
+                  <p className="text-red-500 text-xs mt-1">
+                    Sender contact number is required
+                  </p>
+                )}
               </div>
+              {/* sender email */}
+              <div>
+                <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  Sender Email <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  defaultValue={user?.email}
+                  {...register("senderEmail", { required: true })}
+                  placeholder="Sender Email"
+                  className="input input-bordered w-full bg-white text-sm focus:outline-none focus:border-[#004d40]"
+                />
+                {errors.senderEmail?.type === "required" && (
+                  <p className="text-red-500 text-xs mt-1">
+                    Sender email is required
+                  </p>
+                )}
+              </div>
+
               {/* sender region */}
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
                   Your Region <span className="text-red-500">*</span>
                 </label>
                 <select
-                  {...register("senderRegion")}
+                  {...register("senderRegion", { required: true })}
                   className="select select-bordered w-full bg-white text-sm text-gray-500 focus:outline-none focus:border-[#004d40]"
                 >
                   <option disabled selected>
@@ -219,6 +265,11 @@ const SendParcel = () => {
                     </option>
                   ))}
                 </select>
+                {errors.senderRegion?.type === "required" && (
+                  <p className="text-red-500 text-xs mt-1">
+                    Sender region is required
+                  </p>
+                )}
               </div>
 
               {/* sender district */}
@@ -227,7 +278,7 @@ const SendParcel = () => {
                   Your District <span className="text-red-500">*</span>
                 </label>
                 <select
-                  {...register("senderDistrict")}
+                  {...register("senderDistrict", { required: true })}
                   className="select select-bordered w-full bg-white text-sm text-gray-500 focus:outline-none focus:border-[#004d40]"
                 >
                   <option disabled selected>
@@ -239,6 +290,11 @@ const SendParcel = () => {
                     </option>
                   ))}
                 </select>
+                {errors.senderDistrict?.type === "required" && (
+                  <p className="text-red-500 text-xs mt-1">
+                    Sender district is required
+                  </p>
+                )}
               </div>
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
@@ -264,9 +320,14 @@ const SendParcel = () => {
                 <input
                   type="text"
                   placeholder="Receiver Name"
-                  {...register("receiverName")}
+                  {...register("receiverName", { required: true })}
                   className="input input-bordered w-full bg-white text-sm focus:outline-none focus:border-[#004d40]"
                 />
+                {errors.receiverName?.type === "required" && (
+                  <p className="text-red-500 text-xs mt-1">
+                    Receiver name is required
+                  </p>
+                )}
               </div>
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
@@ -275,20 +336,50 @@ const SendParcel = () => {
                 <input
                   type="text"
                   placeholder="Address"
-                  {...register("receiverAddress")}
+                  {...register("receiverAddress", { required: true })}
                   className="input input-bordered w-full bg-white text-sm focus:outline-none focus:border-[#004d40]"
                 />
+                {errors.receiverAddress?.type === "required" && (
+                  <p className="text-red-500 text-xs mt-1">
+                    Receiver address is required
+                  </p>
+                )}
               </div>
+
+              {/* Receiver Contact No */}
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
                   Receiver Contact No <span className="text-red-500">*</span>
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   placeholder="Receiver Contact No"
-                  {...register("receiverContact")}
+                  {...register("receiverContact", { required: true })}
                   className="input input-bordered w-full bg-white text-sm focus:outline-none focus:border-[#004d40]"
                 />
+                {errors.receiverContact?.type === "required" && (
+                  <p className="text-red-500 text-xs mt-1">
+                    Receiver contact number is required
+                  </p>
+                )}
+              </div>
+
+              {/* receiver email */}
+              <div>
+                <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  Receiver Email <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  {...register("receiverEmail", { required: true })}
+                  placeholder="Receiver Email"
+                  className="input input-bordered w-full bg-white text-sm focus:outline-none focus:border-[#004d40]"
+                />
+                {errors.receiverEmail?.type === "required" && (
+                  <p className="text-red-500 text-xs mt-1">
+                    Receiver email is required
+                  </p>
+                )}
               </div>
 
               {/* receiver Region */}
@@ -297,7 +388,7 @@ const SendParcel = () => {
                   Receiver Region <span className="text-red-500">*</span>
                 </label>
                 <select
-                  {...register("receiverRegion")}
+                  {...register("receiverRegion", { required: true })}
                   className="select select-bordered w-full bg-white text-sm text-gray-500 focus:outline-none focus:border-[#004d40]"
                 >
                   <option disabled selected>
@@ -309,6 +400,11 @@ const SendParcel = () => {
                     </option>
                   ))}
                 </select>
+                {errors.receiverRegion?.type === "required" && (
+                  <p className="text-red-500 text-xs mt-1">
+                    Receiver region is required
+                  </p>
+                )}
               </div>
 
               {/* receiver district */}
@@ -317,7 +413,7 @@ const SendParcel = () => {
                   Receiver District <span className="text-red-500">*</span>
                 </label>
                 <select
-                  {...register("receiverDistrict")}
+                  {...register("receiverDistrict", { required: true })}
                   className="select select-bordered w-full bg-white text-sm text-gray-500 focus:outline-none focus:border-[#004d40]"
                 >
                   <option disabled selected>
@@ -329,6 +425,11 @@ const SendParcel = () => {
                     </option>
                   ))}
                 </select>
+                {errors.receiverDistrict?.type === "required" && (
+                  <p className="text-red-500 text-xs mt-1">
+                    Receiver district is required
+                  </p>
+                )}
               </div>
 
               <div>
