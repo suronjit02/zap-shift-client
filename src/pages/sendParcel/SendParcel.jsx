@@ -1,6 +1,7 @@
 import { useForm, useWatch } from "react-hook-form";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const SendParcel = () => {
   const {
@@ -9,6 +10,8 @@ const SendParcel = () => {
     control,
     formState: { errors },
   } = useForm();
+
+  const useAxios = useAxiosSecure();
 
   const serviceCenters = useLoaderData();
 
@@ -50,7 +53,7 @@ const SendParcel = () => {
           : 150 + ((parcelWeight - 3) * 40 + 40);
       }
     }
-    console.log("Final Cost : ", cost);
+    // console.log("Final Cost : ", cost);
 
     // alert for confirmation
     Swal.fire({
@@ -63,11 +66,20 @@ const SendParcel = () => {
       confirmButtonText: "I Agree!",
     }).then((result) => {
       if (result.isConfirmed)
-        Swal.fire({
-          title: "Success!",
-          text: "Your parcel has been sent.",
-          icon: "success",
-        });
+        useAxios
+          .post("/parcels", data)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+
+      // Swal.fire({
+      //   title: "Success!",
+      //   text: "Your parcel has been sent.",
+      //   icon: "success",
+      // });
     });
   };
 
