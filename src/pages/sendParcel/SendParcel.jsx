@@ -98,7 +98,7 @@ const SendParcel = () => {
 
         <form onSubmit={handleSubmit(handleSendParcel)} className="space-y-6">
           {/* Document / Not-Document Radio Selection */}
-          <div className="flex items-center space-x-8 mb-2">
+          <div className="flex items-center space-x-8 mb-8">
             <label className="cursor-pointer flex items-center space-x-2">
               <input
                 type="radio"
@@ -132,7 +132,7 @@ const SendParcel = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-xs font-semibold text-gray-600 mb-1">
-                Parcel Name <span className="text-red-500">*</span>
+                Parcel Name
               </label>
               <input
                 type="text"
@@ -148,7 +148,7 @@ const SendParcel = () => {
             </div>
             <div>
               <label className="block text-xs font-semibold text-gray-600 mb-1">
-                Parcel Weight (KG) <span className="text-red-500">*</span>
+                Parcel Weight (KG)
               </label>
               <input
                 type="number"
@@ -210,11 +210,11 @@ const SendParcel = () => {
                   </p>
                 )}
               </div>
-              {/* Sender Contact No */}
 
+              {/* Sender Contact No */}
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
-                  Sender Contact No <span className="text-red-500">*</span>
+                  Sender Contact No
                 </label>
                 <input
                   type="number"
@@ -231,7 +231,7 @@ const SendParcel = () => {
               {/* sender email */}
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
-                  Sender Email <span className="text-red-500">*</span>
+                  Sender Email
                 </label>
                 <input
                   type="email"
@@ -250,7 +250,7 @@ const SendParcel = () => {
               {/* sender region */}
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
-                  Your Region <span className="text-red-500">*</span>
+                  Your Region
                 </label>
                 <select
                   {...register("senderRegion", { required: true })}
@@ -275,7 +275,7 @@ const SendParcel = () => {
               {/* sender district */}
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
-                  Your District <span className="text-red-500">*</span>
+                  Your District
                 </label>
                 <select
                   {...register("senderDistrict", { required: true })}
@@ -349,7 +349,7 @@ const SendParcel = () => {
               {/* Receiver Contact No */}
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
-                  Receiver Contact No <span className="text-red-500">*</span>
+                  Receiver Contact No
                 </label>
                 <input
                   type="number"
@@ -367,7 +367,7 @@ const SendParcel = () => {
               {/* receiver email */}
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
-                  Receiver Email <span className="text-red-500">*</span>
+                  Receiver Email
                 </label>
                 <input
                   type="email"
@@ -385,7 +385,7 @@ const SendParcel = () => {
               {/* receiver Region */}
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
-                  Receiver Region <span className="text-red-500">*</span>
+                  Receiver Region
                 </label>
                 <select
                   {...register("receiverRegion", { required: true })}
@@ -410,7 +410,7 @@ const SendParcel = () => {
               {/* receiver district */}
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1">
-                  Receiver District <span className="text-red-500">*</span>
+                  Receiver District
                 </label>
                 <select
                   {...register("receiverDistrict", { required: true })}
