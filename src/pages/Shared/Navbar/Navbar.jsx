@@ -93,11 +93,11 @@ const Navbar = () => {
             Sign In
           </Link>
         )}
-        <Link to={"/become-a-rider"} className="btn btn-accent rounded-lg px-5">
-          Be a rider
-        </Link>
-        <Link className="p-2 rounded-full bg-black-13 text-primary text-2xl">
-          <GoArrowUpRight />
+        <Link to={"/become-a-rider"} className="btn btn-accent rounded-lg px-3">
+          Be a rider{" "}
+          <span className="p-1 rounded-full bg-black-13 text-primary text-xl">
+            <GoArrowUpRight />
+          </span>
         </Link>
       </div>
     </div>
