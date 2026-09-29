@@ -79,7 +79,9 @@ const Navbar = () => {
         </div>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{navlinks}</ul>
+        <ul className="menu menu-horizontal font-semibold text-secondary px-1">
+          {navlinks}
+        </ul>
       </div>
 
       {/* navbar end */}
